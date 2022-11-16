@@ -1,7 +1,9 @@
-package project.recipes;
+package project.recipes.presentation.recipes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import project.recipes.business.recipes.Recipe;
+import project.recipes.business.recipes.RecipeService;
 
 import java.util.Map;
 

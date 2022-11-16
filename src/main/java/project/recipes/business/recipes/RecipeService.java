@@ -1,4 +1,4 @@
-package project.recipes;
+package project.recipes.business.recipes;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

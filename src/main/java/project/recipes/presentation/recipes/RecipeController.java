@@ -15,11 +15,11 @@ public class RecipeController {
 
     @GetMapping("/api/recipe/{id}")
     public Recipe getRecipe(@PathVariable int id) {
-        return recipeService.getRecipe(id - 1);
+        return recipeService.getRecipe(id);
     }
 
     @PostMapping("/api/recipe/new")
-    public Map<String, Integer> addRecipe(@RequestBody Recipe recipe) {
-        return recipeService.save(recipe);
+    public Map<String, Long> addRecipe(@RequestBody Recipe recipe) {
+        return recipeService.addRecipe(recipe);
     }
 }

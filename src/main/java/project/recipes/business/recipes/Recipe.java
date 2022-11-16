@@ -1,6 +1,7 @@
 package project.recipes.business.recipes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @Entity
 @Getter @Setter
 @NoArgsConstructor
+@JsonPropertyOrder({"id", "name", "description", "ingredients", "directions"})
 public class Recipe {
 
     @Id
@@ -40,6 +42,18 @@ public class Recipe {
 
         this.directions = Arrays.stream(directions)
                 .map(RecipeDirection::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getIngredients() {
+        return this.ingredients.stream()
+                .map(RecipeIngredient::getIngredient)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getDirections() {
+        return this.directions.stream()
+                .map(RecipeDirection::getDirection)
                 .collect(Collectors.toList());
     }
 }

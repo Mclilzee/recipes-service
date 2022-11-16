@@ -1,12 +1,16 @@
 package project.recipes.business.recipes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,41 +23,30 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "recipe_id")
-    private List<RecipeIngredient> ingredients;
+    @ElementCollection
+    @OrderColumn
+    @NotEmpty
+    private String[] ingredients;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "recipe_id")
-    private List<RecipeDirection> directions;
+    @ElementCollection
+    @OrderColumn
+    @NotEmpty
+    private String[] directions;
 
     @JsonCreator
-    public Recipe(String name, String description, String[] ingredients, String[] directions) {
+    public Recipe(String name, String description, @NotNull String[] ingredients, @NotNull String[] directions) {
         this.name = name;
         this.description = description;
-        this.ingredients = Arrays.stream(ingredients)
-                .map(RecipeIngredient::new)
-                .collect(Collectors.toList());
-
-        this.directions = Arrays.stream(directions)
-                .map(RecipeDirection::new)
-                .collect(Collectors.toList());
-    }
-
-    public List<String> getIngredients() {
-        return this.ingredients.stream()
-                .map(RecipeIngredient::getIngredient)
-                .collect(Collectors.toList());
-    }
-
-    public List<String> getDirections() {
-        return this.directions.stream()
-                .map(RecipeDirection::getDirection)
-                .collect(Collectors.toList());
+        this.ingredients = ingredients;
+        this.directions = directions;
     }
 }

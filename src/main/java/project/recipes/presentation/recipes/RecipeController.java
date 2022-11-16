@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import project.recipes.business.recipes.Recipe;
 import project.recipes.business.recipes.RecipeService;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @RestController
@@ -20,7 +21,7 @@ public class RecipeController {
     }
 
     @PostMapping("/api/recipe/new")
-    public Map<String, Long> addRecipe(@RequestBody Recipe recipe) {
+    public Map<String, Long> addRecipe(@RequestBody @Valid Recipe recipe) {
         return recipeService.addRecipe(recipe);
     }
 

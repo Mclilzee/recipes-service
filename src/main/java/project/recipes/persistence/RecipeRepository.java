@@ -6,7 +6,7 @@ import project.recipes.business.recipes.Recipe;
 import java.util.List;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-    List<Recipe> findAllByCategory(String category);
+    List<Recipe> findAllByCategoryIgnoreCase(String category);
 
-    List<Recipe> findAllByName(String name);
+    List<Recipe> findAllByNameIgnoreCase(String name);
 }

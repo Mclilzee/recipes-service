@@ -52,7 +52,7 @@ public class RecipeService {
     }
 
     public List<Recipe> findRecipesByCategory(String category) {
-        return recipeRepository.findAllByCategory(category).stream().
+        return recipeRepository.findAllByCategoryIgnoreCase(category).stream().
                 sorted().
                 collect(Collectors.toList());
     }

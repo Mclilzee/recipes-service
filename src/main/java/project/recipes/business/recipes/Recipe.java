@@ -46,11 +46,6 @@ public class Recipe implements Comparable<Recipe> {
     @NotEmpty
     private String[] directions;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private User user;
-
     @JsonCreator
     public Recipe(String name, String category, String description, @NotNull String[] ingredients, @NotNull String[] directions) {
         this.name = name;

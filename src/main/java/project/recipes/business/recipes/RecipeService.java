@@ -2,8 +2,11 @@ package project.recipes.business.recipes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import project.recipes.business.user.User;
+import project.recipes.business.user.UserService;
 import project.recipes.persistence.RecipeRepository;
 
 import java.util.HashMap;
@@ -18,7 +21,12 @@ public class RecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
 
-    public Map<String, Long> addRecipe(Recipe recipe) {
+    @Autowired
+    UserService userService;
+
+    public Map<String, Long> addRecipe(UserDetails userDetails, Recipe recipe) {
+        User user = userService.getUser(userDetails);
+        recipe.setUser(user);
         recipe = this.recipeRepository.save(recipe);
 
         Map<String, Long> response = new HashMap<>();

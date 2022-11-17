@@ -2,6 +2,8 @@ package project.recipes.presentation.recipes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import project.recipes.business.recipes.Recipe;
 import project.recipes.business.recipes.RecipeService;
@@ -22,8 +24,8 @@ public class RecipeController {
     }
 
     @PostMapping("/api/recipe/new")
-    public Map<String, Long> addRecipe(@RequestBody @Valid Recipe recipe) {
-        return recipeService.addRecipe(recipe);
+    public Map<String, Long> addRecipe(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid Recipe recipe) {
+        return recipeService.addRecipe(userDetails, recipe);
     }
 
     @DeleteMapping("/api/recipe/{id}")

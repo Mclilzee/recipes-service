@@ -7,6 +7,7 @@ import project.recipes.business.recipes.Recipe;
 import project.recipes.business.recipes.RecipeService;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -36,5 +37,10 @@ public class RecipeController {
         recipe.setId(id);
         recipeService.updateRecipe(recipe);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/api/recipe/search")
+    public List<Recipe> getRecipeByCategory(@RequestParam String category) {
+        return recipeService.findRecipesByCategory(category);
     }
 }

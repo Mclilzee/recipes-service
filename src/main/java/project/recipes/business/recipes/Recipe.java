@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @NoArgsConstructor
 @JsonPropertyOrder({ "name", "date", "category", "description", "ingredients", "directions"})
-public class Recipe {
+public class Recipe implements Comparable<Recipe> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,5 +53,10 @@ public class Recipe {
         this.description = description;
         this.ingredients = ingredients;
         this.directions = directions;
+    }
+
+    @Override
+    public int compareTo(Recipe o) {
+        return this.date.compareTo(o.date);
     }
 }

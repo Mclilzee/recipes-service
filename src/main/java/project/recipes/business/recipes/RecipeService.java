@@ -66,6 +66,16 @@ public class RecipeService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
+        User user = userService.getUser(userDetails);
+
+        updateUserRecipe(user, recipe);
+    }
+
+    private void updateUserRecipe(User user, Recipe recipe) {
+        if (user.getId() != recipe.getUser().getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
         recipeRepository.save(recipe);
     }
 

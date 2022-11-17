@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Getter @Setter
@@ -59,5 +60,18 @@ public class Recipe implements Comparable<Recipe> {
     @Override
     public int compareTo(Recipe otherRecipe) {
         return otherRecipe.date.compareTo(this.date);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return Objects.equals(id, recipe.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

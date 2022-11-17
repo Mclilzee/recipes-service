@@ -43,15 +43,25 @@ public class RecipeService {
         return recipe.get();
     }
 
-    public void deleteRecipe(long id) {
-        if (!recipeRepository.existsById(id)) {
+    public void deleteRecipe(UserDetails userDetails, long id) {
+        Optional<Recipe> recipe = recipeRepository.findById(id);
+        if (recipe.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
-        recipeRepository.deleteById(id);
+        User user = userService.getUser(userDetails);
+        deleteUserRecipe(user, recipe.get());
     }
 
-    public void updateRecipe(Recipe recipe) {
+    private void deleteUserRecipe(User user, Recipe recipe) {
+        if (user.getId() != recipe.getUser().getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
+        recipeRepository.delete(recipe);
+    }
+
+    public void updateRecipe(UserDetails userDetails, Recipe recipe) {
         if (!recipeRepository.existsById(recipe.getId())) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

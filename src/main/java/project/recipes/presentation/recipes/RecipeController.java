@@ -29,15 +29,16 @@ public class RecipeController {
     }
 
     @DeleteMapping("/api/recipe/{id}")
-    public ResponseEntity<Object> deleteRecipe(@PathVariable long id) {
-        recipeService.deleteRecipe(id);
+    public ResponseEntity<Object> deleteRecipe(@AuthenticationPrincipal UserDetails userDetails, @PathVariable long id) {
+        recipeService.deleteRecipe(userDetails, id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/api/recipe/{id}")
-    public ResponseEntity<Object> updateRecipe(@RequestBody @Valid Recipe recipe, @PathVariable long id) {
+    public ResponseEntity<Object> updateRecipe(@AuthenticationPrincipal UserDetails userDetails,
+                                               @RequestBody @Valid Recipe recipe, @PathVariable long id) {
         recipe.setId(id);
-        recipeService.updateRecipe(recipe);
+        recipeService.updateRecipe(userDetails, recipe);
         return ResponseEntity.noContent().build();
     }
 

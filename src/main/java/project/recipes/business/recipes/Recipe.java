@@ -56,7 +56,7 @@ public class Recipe implements Comparable<Recipe> {
     }
 
     @Override
-    public int compareTo(Recipe o) {
-        return this.date.compareTo(o.date);
+    public int compareTo(Recipe otherRecipe) {
+        return otherRecipe.date.compareTo(this.date);
     }
 }

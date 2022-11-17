@@ -20,7 +20,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Email
     @Column(unique = true)
@@ -33,4 +33,9 @@ public class User {
     @OneToMany
     @JoinColumn(name = "user_id")
     private List<Recipe> recipes;
+
+    public long addRecipe(Recipe recipe) {
+        this.recipes.add(recipe);
+        return this.recipes.size();
+    }
 }

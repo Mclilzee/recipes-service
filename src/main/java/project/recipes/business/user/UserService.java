@@ -36,4 +36,12 @@ public class UserService {
 
        return user.get();
     }
+
+    public void updateUser(User user) {
+        if (user.getId() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        userRepository.save(user);
+    }
 }

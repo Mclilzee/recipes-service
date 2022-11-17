@@ -26,11 +26,11 @@ public class RecipeService {
 
     public Map<String, Long> addRecipe(UserDetails userDetails, Recipe recipe) {
         User user = userService.getUser(userDetails);
-        recipe.setUser(user);
-        recipe = this.recipeRepository.save(recipe);
+        long id = user.addRecipe(recipe);
 
+        userService.updateUser(user);
         Map<String, Long> response = new HashMap<>();
-        response.put("id", recipeRepository.save(recipe).getId());
+        response.put("id", id);
         return response;
     }
 

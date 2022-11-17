@@ -1,13 +1,13 @@
-package project.recipes.business.recipes;
+package recipes.business.recipes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import project.recipes.business.user.User;
-import project.recipes.business.user.UserService;
-import project.recipes.persistence.RecipeRepository;
+import recipes.business.user.User;
+import recipes.business.user.UserService;
+import recipes.persistence.RecipeRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,11 +26,11 @@ public class RecipeService {
 
     public Map<String, Long> addRecipe(UserDetails userDetails, Recipe recipe) {
         User user = userService.getUser(userDetails);
-        long id = user.addRecipe(recipe);
+        recipe.setUserId(user.getId());
 
-        userService.updateUser(user);
+        recipe = recipeRepository.save(recipe);
         Map<String, Long> response = new HashMap<>();
-        response.put("id", id);
+        response.put("id", recipe.getId());
         return response;
     }
 
@@ -54,20 +54,21 @@ public class RecipeService {
     }
 
     private void deleteUserRecipe(User user, Recipe recipe) {
-        if (user.getId() != recipe.getUser().getId()) {
+        if (!user.getRecipes().contains(recipe)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
         recipeRepository.delete(recipe);
     }
 
-    public void updateRecipe(UserDetails userDetails, Recipe recipe) {
-        if (!recipeRepository.existsById(recipe.getId())) {
+    public void updateRecipe(UserDetails userDetails, Recipe recipeToUpdate) {
+        Optional<Recipe> recipe = recipeRepository.findById(recipeToUpdate.getId());
+
+        if (recipe.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
         User user = userService.getUser(userDetails);
-
         updateUserRecipe(user, recipe);
     }
 

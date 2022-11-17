@@ -1,7 +1,7 @@
-package project.recipes.persistence;
+package recipes.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import project.recipes.business.user.User;
+import recipes.business.user.User;
 
 import java.util.Optional;
 

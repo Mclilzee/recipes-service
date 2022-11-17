@@ -1,11 +1,11 @@
-package project.recipes.business.user;
+package recipes.business.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import project.recipes.persistence.UserRepository;
+import recipes.persistence.UserRepository;
 
 import java.util.Optional;
 

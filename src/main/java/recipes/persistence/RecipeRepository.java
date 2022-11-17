@@ -1,7 +1,7 @@
-package project.recipes.persistence;
+package recipes.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import project.recipes.business.recipes.Recipe;
+import recipes.business.recipes.Recipe;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
-package project.recipes.presentation.recipes;
+package recipes.presentation.recipes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import project.recipes.business.recipes.Recipe;
-import project.recipes.business.recipes.RecipeService;
+import recipes.business.recipes.Recipe;
+import recipes.business.recipes.RecipeService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -37,6 +37,7 @@ public class RecipeController {
     @PutMapping("/api/recipe/{id}")
     public ResponseEntity<Object> updateRecipe(@AuthenticationPrincipal UserDetails userDetails,
                                                @RequestBody @Valid Recipe recipe, @PathVariable long id) {
+
         recipe.setId(id);
         recipeService.updateRecipe(userDetails, recipe);
         return ResponseEntity.noContent().build();

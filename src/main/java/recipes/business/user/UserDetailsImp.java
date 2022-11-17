@@ -1,4 +1,4 @@
-package project.recipes.business.user;
+package recipes.business.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

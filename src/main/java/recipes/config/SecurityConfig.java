@@ -1,4 +1,4 @@
-package project.recipes.config;
+package recipes.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Component;
-import project.recipes.business.user.UserDetailsServiceImp;
+import recipes.business.user.UserDetailsServiceImp;
 
 @Component
 public class SecurityConfig {

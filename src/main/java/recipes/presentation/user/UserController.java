@@ -1,12 +1,12 @@
-package project.recipes.presentation.user;
+package recipes.presentation.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import project.recipes.business.user.User;
-import project.recipes.business.user.UserService;
+import recipes.business.user.User;
+import recipes.business.user.UserService;
 
 import javax.validation.Valid;
 

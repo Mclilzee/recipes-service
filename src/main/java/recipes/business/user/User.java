@@ -1,10 +1,9 @@
-package project.recipes.business.user;
+package recipes.business.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import project.recipes.business.recipes.Recipe;
+import recipes.business.recipes.Recipe;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

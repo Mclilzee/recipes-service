@@ -1,4 +1,4 @@
-package project.recipes.business.recipes;
+package recipes.business.recipes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import project.recipes.business.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -46,6 +45,9 @@ public class Recipe implements Comparable<Recipe> {
     @OrderColumn
     @NotEmpty
     private String[] directions;
+
+    @Column(name = "user_id")
+    private long userId;
 
     @JsonCreator
     public Recipe(String name, String category, String description, @NotNull String[] ingredients, @NotNull String[] directions) {

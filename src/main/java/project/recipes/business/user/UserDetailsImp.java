@@ -6,7 +6,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class UserDetailsImp implements UserDetails {
-    private User user;
+    private final User user;
+
+    public UserDetailsImp(User user) {
+        this.user = user;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

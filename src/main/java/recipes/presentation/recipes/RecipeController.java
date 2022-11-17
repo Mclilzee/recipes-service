@@ -38,8 +38,7 @@ public class RecipeController {
     public ResponseEntity<Object> updateRecipe(@AuthenticationPrincipal UserDetails userDetails,
                                                @RequestBody @Valid Recipe recipe, @PathVariable long id) {
 
-        recipe.setId(id);
-        recipeService.updateRecipe(userDetails, recipe);
+        recipeService.updateRecipe(userDetails, recipe, id);
         return ResponseEntity.noContent().build();
     }
 

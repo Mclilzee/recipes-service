@@ -44,38 +44,38 @@ public class RecipeService {
     }
 
     public void deleteRecipe(UserDetails userDetails, long id) {
-        Optional<Recipe> recipe = recipeRepository.findById(id);
-        if (recipe.isEmpty()) {
+        if (recipeRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
         User user = userService.getUser(userDetails);
-        deleteUserRecipe(user, recipe.get());
+        deleteUserRecipe(user, id);
     }
 
-    private void deleteUserRecipe(User user, Recipe recipe) {
-        if (!userOwnsRecipe(user, recipe)) {
+    private void deleteUserRecipe(User user, long id) {
+        if (!userOwnsRecipe(user, id)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
-        recipeRepository.delete(recipe);
+        recipeRepository.deleteById(id);
     }
 
-    public void updateRecipe(UserDetails userDetails, Recipe recipeToUpdate) {
-        Optional<Recipe> recipe = recipeRepository.findById(recipeToUpdate.getId());
-        if (recipe.isEmpty()) {
+    public void updateRecipe(UserDetails userDetails, Recipe newRecipe, long id) {
+        if (!recipeRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
         User user = userService.getUser(userDetails);
-        updateUserRecipe(user, recipe.get());
+        newRecipe.setId(id);
+        updateUserRecipe(user, newRecipe);
     }
 
     private void updateUserRecipe(User user, Recipe recipe) {
-        if (!userOwnsRecipe(user, recipe)) {
+        if (!userOwnsRecipe(user, recipe.getId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
+        recipe.setUserId(user.getId());
         recipeRepository.save(recipe);
     }
 
@@ -91,7 +91,8 @@ public class RecipeService {
                 .collect(Collectors.toList());
     }
 
-    private boolean userOwnsRecipe(User user, Recipe recipe) {
-        return user.getRecipes().contains(recipe);
+    private boolean userOwnsRecipe(User user, long id) {
+        return user.getRecipes().stream()
+                .anyMatch(recipe -> recipe.getId() == id);
     }
 }

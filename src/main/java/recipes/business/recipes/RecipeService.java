@@ -91,8 +91,8 @@ public class RecipeService {
                 .collect(Collectors.toList());
     }
 
-    private boolean userOwnsRecipe(User user, long id) {
+    private boolean userOwnsRecipe(User user, long recipeId) {
         return user.getRecipes().stream()
-                .anyMatch(recipe -> recipe.getId() == id);
+                .anyMatch(recipe -> recipe.getId() == recipeId);
     }
 }

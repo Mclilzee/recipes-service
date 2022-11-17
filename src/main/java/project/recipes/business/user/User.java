@@ -23,6 +23,7 @@ public class User {
     private long id;
 
     @Email
+    @Column(unique = true)
     private String email;
 
     @Size(min = 8)

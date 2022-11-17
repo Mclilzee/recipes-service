@@ -63,7 +63,6 @@ public class RecipeService {
 
     public void updateRecipe(UserDetails userDetails, Recipe recipeToUpdate) {
         Optional<Recipe> recipe = recipeRepository.findById(recipeToUpdate.getId());
-
         if (recipe.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

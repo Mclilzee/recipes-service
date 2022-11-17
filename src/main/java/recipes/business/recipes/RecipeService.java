@@ -54,7 +54,7 @@ public class RecipeService {
     }
 
     private void deleteUserRecipe(User user, Recipe recipe) {
-        if (!user.getRecipes().contains(recipe)) {
+        if (!userOwnsRecipe(user, recipe)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
@@ -69,11 +69,11 @@ public class RecipeService {
         }
 
         User user = userService.getUser(userDetails);
-        updateUserRecipe(user, recipe);
+        updateUserRecipe(user, recipe.get());
     }
 
     private void updateUserRecipe(User user, Recipe recipe) {
-        if (user.getId() != recipe.getUser().getId()) {
+        if (!userOwnsRecipe(user, recipe)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
@@ -90,5 +90,9 @@ public class RecipeService {
         return recipeRepository.findByNameContainingIgnoreCase(name).stream()
                 .sorted()
                 .collect(Collectors.toList());
+    }
+
+    private boolean userOwnsRecipe(User user, Recipe recipe) {
+        return user.getRecipes().contains(recipe);
     }
 }

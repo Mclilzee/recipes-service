@@ -22,7 +22,7 @@ public class RecipeService {
     private RecipeRepository recipeRepository;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     public Map<String, Long> addRecipe(UserDetails userDetails, Recipe recipe) {
         User user = userService.getUser(userDetails);

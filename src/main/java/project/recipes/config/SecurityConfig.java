@@ -20,9 +20,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .httpBasic()
                 .and().formLogin()
-                .and().csrf().disable().headers().frameOptions().disable()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
+                .and().csrf().disable().headers().frameOptions().disable();
 
         return http.build();
     }

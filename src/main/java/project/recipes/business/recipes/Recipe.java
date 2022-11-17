@@ -11,14 +11,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor
-@JsonPropertyOrder({"id", "name", "description", "ingredients", "directions"})
+@JsonPropertyOrder({ "name", "date", "category", "description", "ingredients", "directions"})
 public class Recipe {
 
     @Id
@@ -28,6 +26,11 @@ public class Recipe {
 
     @NotBlank
     private String name;
+
+    private LocalDateTime date;
+
+    @NotBlank
+    private String category;
 
     @NotBlank
     private String description;
@@ -43,8 +46,10 @@ public class Recipe {
     private String[] directions;
 
     @JsonCreator
-    public Recipe(String name, String description, @NotNull String[] ingredients, @NotNull String[] directions) {
+    public Recipe(String name, String category, String description, @NotNull String[] ingredients, @NotNull String[] directions) {
         this.name = name;
+        this.category = category;
+        this.date = LocalDateTime.now();
         this.description = description;
         this.ingredients = ingredients;
         this.directions = directions;

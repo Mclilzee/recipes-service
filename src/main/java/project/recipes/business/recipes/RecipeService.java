@@ -42,4 +42,12 @@ public class RecipeService {
 
         recipeRepository.deleteById(id);
     }
+
+    public void updateRecipe(Recipe recipe) {
+        if (!recipeRepository.existsById(recipe.getId())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        recipeRepository.save(recipe);
+    }
 }

@@ -30,4 +30,11 @@ public class RecipeController {
         recipeService.deleteRecipe(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/api/recipe/{id}")
+    public ResponseEntity<Object> updateRecipe(@RequestBody @Valid Recipe recipe, @PathVariable long id) {
+        recipe.setId(id);
+        recipeService.updateRecipe(recipe);
+        return ResponseEntity.noContent().build();
+    }
 }

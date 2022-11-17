@@ -39,8 +39,18 @@ public class RecipeController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/api/recipe/search")
+    @GetMapping(value = "/api/recipe/search", params = {"category"})
     public List<Recipe> getRecipeByCategory(@RequestParam String category) {
         return recipeService.findRecipesByCategory(category);
+    }
+
+    @GetMapping(value = "/api/recipe/search", params = {"name"})
+    public List<Recipe> getRecipeByName(@RequestParam String name) {
+        return recipeService.findRecipeByName(name);
+    }
+
+    @GetMapping(value = "/api/recipe/search", params = {"name", "category"})
+    public List<Recipe> getRecipeByNameAndCategory(@RequestParam String name, @RequestParam String category) {
+        return getRecipeByName(name);
     }
 }

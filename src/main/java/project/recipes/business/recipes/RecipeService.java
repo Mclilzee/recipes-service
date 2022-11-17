@@ -52,8 +52,14 @@ public class RecipeService {
     }
 
     public List<Recipe> findRecipesByCategory(String category) {
-        return recipeRepository.findAllByCategoryIgnoreCase(category).stream().
-                sorted().
-                collect(Collectors.toList());
+        return recipeRepository.findAllByCategoryIgnoreCase(category).stream()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public List<Recipe> findRecipeByName(String name) {
+        return recipeRepository.findAllByNameIgnoreCase(name).stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 }

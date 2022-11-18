@@ -44,7 +44,7 @@ public class RecipeService {
     }
 
     public void deleteRecipe(UserDetails userDetails, long id) {
-        if (recipeRepository.existsById(id)) {
+        if (!recipeRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
@@ -91,8 +91,8 @@ public class RecipeService {
                 .collect(Collectors.toList());
     }
 
-    private boolean userOwnsRecipe(User user, long recipeId) {
+    private boolean userOwnsRecipe(User user, long id) {
         return user.getRecipes().stream()
-                .anyMatch(recipe -> recipe.getId() == recipeId);
+                .anyMatch(recipe -> recipe.getId() == id);
     }
 }

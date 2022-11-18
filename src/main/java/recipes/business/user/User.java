@@ -29,7 +29,7 @@ public class User {
     @NotBlank
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "user_id")
     private List<Recipe> recipes;
 

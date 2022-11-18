@@ -29,7 +29,7 @@ public class User {
     @NotBlank
     private String password;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private List<Recipe> recipes;
 

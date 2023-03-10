@@ -33,6 +33,8 @@ The other endpoints requires to be logged on
 - DELETE `api/recipe/{id}` take recipe id as path variable and deletes the recipe from server database
 - GET `apip/recipe/search?{name or catagory}` takes parameters such as `name=tea` or `catagory=desert` to query the database for recipes
 
+Note: can only update and edit owned recipe posted by the same user, other users can only see other people recipes but not modify them.
+
 # Example - Registering
 <img src="./examples/register.png" alt="send json object to register with email and password" />
 
@@ -41,11 +43,11 @@ Following examples required to be logged in after creating the account.
 # Example - Posting Recipe
 <img src="./examples/new-recipe.png" alt="json object of recipe details post request using postman" />
 
-# Example - Getting Recipe
-<img src="./examples/get-recipe.png" alt="path variable to get specific recipe id" />
-
 # Example - Editing Recipe
 <img src="./examples/edit-recipe.png" alt="json object of new recipe to edit" />
+
+# Example - Getting Recipe
+<img src="./examples/get-recipe.png" alt="path variable to get specific recipe id" />
 
 # Example - Deleting Recipe
 <img src="./examples/delete-recipe.png" alt="delete http request for server" />
@@ -54,5 +56,5 @@ Following examples required to be logged in after creating the account.
 - Using Name
 <img src="./examples/search-using-name.png" alt="get request with search parameter" />
  
-- Using Catagory
-<img src ="./examples/search-using-catagory.png" alt="get request with catagory search" />
+- Using Category
+<img src ="./examples/search-using-category.png" alt="get request with catagory search" />

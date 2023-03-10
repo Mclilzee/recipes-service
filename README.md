@@ -35,6 +35,7 @@ The other endpoints requires to be logged on
 
 Note: can only update and edit owned recipe posted by the same user, other users can only see other people recipes but not modify them.
 
+HTTP requests are made using <a href="https://www.postman.com/">Postman</a>
 # Example - Registering
 <img src="./examples/register.png" alt="send json object to register with email and password" />
 

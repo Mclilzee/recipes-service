@@ -28,12 +28,12 @@ Default port is `localhost:8080` Endpoints will be relative path to the local po
 
 The other endpoints requires to be logged on
 - POST `api/recipe/new` accepts json body as recipe, require to be logged in as valid user responds with recipe id object more information the examples bellow.
-- GET `api/recipe/{id}` takes recipe id as parameter and return recipe object
-- PUT `api/recipe/{id}` take recipe id as parameter and json recipe body, to edit and change the recipe
-- DELETE `api/recipe/{id}` take recipe id as parameter and deletes the recipe from server database
+- GET `api/recipe/{id}` takes recipe id as path variable and return recipe object
+- PUT `api/recipe/{id}` take recipe id as path variable and json recipe body, to edit and change the recipe
+- DELETE `api/recipe/{id}` take recipe id as path variable and deletes the recipe from server database
+- GET `apip/recipe/search?{name or catagory}` takes parameters such as `name=tea` or `catagory=desert` to query the database for recipes
 
-## Registering
-- POST `api/register` will take a json of user register body with properties of email and password.
+## Example - Registering
 ```json
 {
   "email": "johndoe@hotmail.com",

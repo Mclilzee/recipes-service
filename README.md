@@ -33,28 +33,26 @@ The other endpoints requires to be logged on
 - DELETE `api/recipe/{id}` take recipe id as path variable and deletes the recipe from server database
 - GET `apip/recipe/search?{name or catagory}` takes parameters such as `name=tea` or `catagory=desert` to query the database for recipes
 
-## Example - Registering
-```json
-{
-  "email": "johndoe@hotmail.com",
-  "password": "123456789"
-}
-```
-## Posting Recipe
-- POST `api/recipe/new` accepts json body as recipe, require to be logged in as valid user
-```json
-{
-   "name": "Fresh Mint Tea",
-   "category": "Dessert",
-   "description": "Light, aromatic and refreshing beverage, ...",
-   "ingredients": ["boiled water", "honey", "fresh mint leaves"],
-   "directions": ["Boil water", "Pour boiling hot water into a mug", "Add fresh mint leaves", "Mix and let the mint leaves seep for 3-5 minutes", "Add honey and mix again"]
-}
-```
-- responde with json of property id for recipe id
-```json
-{
-  "id": 1
-}
-```
-- GET `api/recipe/{id}` takes recipe id and print it out ot the user 
+# Example - Registering
+<img src="./examples/register.png" alt="send json object to register with email and password" />
+
+Following examples required to be logged in after creating the account.
+
+# Example - Posting Recipe
+<img src="./examples/new-recipe.png" alt="json object of recipe details post request using postman" />
+
+# Example - Getting Recipe
+<img src="./examples/get-recipe.png" alt="path variable to get specific recipe id" />
+
+# Example - Editing Recipe
+<img src="./examples/edit-recipe.png" alt="json object of new recipe to edit" />
+
+# Example - Deleting Recipe
+<img src="./examples/delete-recipe.png" alt="delete http request for server" />
+
+# Example - Searching Recipe
+- Using Name
+<img src="./examples/search-using-name.png" alt="get request with search parameter" />
+ 
+- Using Catagory
+<img src ="./examples/search-using-catagory.png" alt="get request with catagory search" />

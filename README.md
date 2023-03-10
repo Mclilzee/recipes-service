@@ -23,6 +23,16 @@ To shut down the server use actuator by sending POST request to `https://localho
 
 # Endpoints
 Default port is `localhost:8080` Endpoints will be relative path to the local port.
+
+- POST `api/register` will take a json of user register body with properties of email and password.
+
+The other endpoints requires to be logged on
+- POST `api/recipe/new` accepts json body as recipe, require to be logged in as valid user responds with recipe id object more information the examples bellow.
+- GET `api/recipe/{id}` takes recipe id as parameter and return recipe object
+- PUT `api/recipe/{id}` take recipe id as parameter and json recipe body, to edit and change the recipe
+- DELETE `api/recipe/{id}` take recipe id as parameter and deletes the recipe from server database
+
+## Registering
 - POST `api/register` will take a json of user register body with properties of email and password.
 ```json
 {
@@ -30,8 +40,21 @@ Default port is `localhost:8080` Endpoints will be relative path to the local po
   "password": "123456789"
 }
 ```
+## Posting Recipe
 - POST `api/recipe/new` accepts json body as recipe, require to be logged in as valid user
-JSON format
 ```json
-
+{
+   "name": "Fresh Mint Tea",
+   "category": "Dessert",
+   "description": "Light, aromatic and refreshing beverage, ...",
+   "ingredients": ["boiled water", "honey", "fresh mint leaves"],
+   "directions": ["Boil water", "Pour boiling hot water into a mug", "Add fresh mint leaves", "Mix and let the mint leaves seep for 3-5 minutes", "Add honey and mix again"]
+}
 ```
+- responde with json of property id for recipe id
+```json
+{
+  "id": 1
+}
+```
+- GET `api/recipe/{id}` takes recipe id and print it out ot the user 
